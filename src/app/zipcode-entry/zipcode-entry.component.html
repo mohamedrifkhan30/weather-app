@@ -1,0 +1,28 @@
+<div class="well">
+  <h2>Enter a zipcode:</h2>
+  <input type="text" #zipcode placeholder="Zipcode" class="form-control">
+  <h2>Enter a country: </h2>
+  <input type="text" #country [(ngModel)]="countryName" placeholder="country" class="form-control" (input)="getCountries(country.value)">
+  <div class="autocomplete-items" *ngIf="showList" >
+    <div *ngFor="let item of countries$ | async; trackBy:identifyFn" >
+      <div (click)="selectedCountry(item)" [innerHTML]="item.displayName"></div>
+</div>
+</div>
+  <br>
+  <!-- (onclick)="addLocation(zipcode.value,country.value)" -->
+  <app-button  [buttonObservable]="button$" (click)="addLocation(zipcode.value,country.value)" (data)="settingData($event)"
+  [defaultTemplate]="default" [processingTemplate]="pending" [completeTemplate]="complete">
+      
+  </app-button>
+</div>
+<ng-template #default>
+  Add Location
+</ng-template>
+
+<ng-template #pending>
+  Adding...
+</ng-template>
+
+<ng-template #complete>
+  Done
+</ng-template>
