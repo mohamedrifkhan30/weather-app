@@ -19,8 +19,6 @@ export class ZipcodeEntryComponent implements OnInit{
   countriesAll$: Observable<Country[]>;
   countries$: Observable<Country[]>;
   button$:Observable<any>;
-
-  //buttonObservalvbe = new BehaviorSubject<ButtonLabel>({disabled:false,label:"Add Location"});
   
   constructor(private service : LocationService,private weatherService:WeatherService) {}
 
@@ -30,26 +28,12 @@ export class ZipcodeEntryComponent implements OnInit{
 
   addLocation(zipcode : string){
     this.button$ = this.weatherService.addCurrentConditions(zipcode,this.countryCode);
-
-    // // this.weatherService.addCurrentConditions(zipcode,this.countryCode).subscribe(res=>{
-    // //   this.weatherService.getAllWeatherDetail(this.service.addLocation(zipcode,this.countryCode));
-    // //  // this.triggerNextState({disabled:true,label:"Done"});
-    // // },()=>{
-    // //  // this.triggerNextState({disabled:false,label:"Add Location"});
-    // // },()=>{
-    // //   setTimeout(()=>{
-    // //    // this.triggerNextState({disabled:false,label:"Add Location"});
-    // //    }, 500);
-    // // });
-    
   }
   settingData($event){
     this.weatherService.getAllWeatherDetail(this.service.addLocation($event.zipCode,$event.sys.country.toLowerCase()));
   }
 
-//  triggerNextState(label:ButtonLabel){
-//   this.buttonObservalvbe.next(label);
-//  }
+
 
  getCountries(country:string){
   this.showList =true;

@@ -17,7 +17,6 @@ export class WeatherService {
   constructor(private http: HttpClient) { }
 
   addCurrentConditions(zipcode: string,country:string): Observable<any> {
-    // Here we make a request to get the curretn conditions data from the API. Note the use of backticks and an expression to insert the zipcode
     return this.http.get(`${WeatherService.URL}/weather?zip=${zipcode},${country}&APPID=${WeatherService.APPID}`).pipe(map(res=>{
       res["zipCode"] = zipcode;
       return res;
@@ -36,9 +35,7 @@ export class WeatherService {
   }
 
   getForecast(zipcode: string,country:string): Observable<any> {
-    // Here we make a request to get the forecast data from the API. Note the use of backticks and an expression to insert the zipcode
     return this.http.get(`${WeatherService.URL}/forecast/daily?zip=${zipcode},${country.toLowerCase()}&units=imperial&cnt=5&APPID=${WeatherService.APPID}`);
-
   }
 
   getWeatherIcon(id){
